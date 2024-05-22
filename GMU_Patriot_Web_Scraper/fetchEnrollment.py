@@ -1,7 +1,8 @@
 import requests
+import argparse
 
-def fetch_enrollment_info():
-    # Your URL and other request details here
+def fetch_enrollment_info(term, crn):
+    # Enrollment Info
     url = 'https://ssbstureg.gmu.edu/StudentRegistrationSsb/ssb/searchResults/getEnrollmentInfo'
     headers = {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -11,8 +12,8 @@ def fetch_enrollment_info():
         'JSESSIONID': '',  # Blank Session ID // Not Pushing Any Cookies
     }
     data = {
-        'courseReferenceNumber': '82442', # CRN Number as per PatriotWeb (Course Example: CS471 | Operating Systems)
-        'term': '202470' # Session Term # Summer_2024: 202440 # Fall_2024: 202470 #
+        'courseReferenceNumber': crn,  # CRN Number as per PatriotWeb
+        'term': term  # Session Term
     }
 
     # Make the POST request
@@ -55,5 +56,12 @@ def parse_enrollment_data(html_data):
     return enrollment_data
 
 # Example usage: Fetching and parsing the data
-enrollment_info = fetch_enrollment_info()
-print(enrollment_info)
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='Fetch GMU course information.')
+    parser.add_argument('--term', type=str, required=True, help='Academic term (e.g., 202470 for Fall 2024)')
+    parser.add_argument('--crn', type=str, required=True, help='Course Reference Number (CRN)')
+
+    args = parser.parse_args()
+
+    class_info = fetch_enrollment_info(args.term, args.crn)
+    print(class_info)
