@@ -1,7 +1,7 @@
 import requests
 import argparse
 
-def fetch_class_info(term, crn):
+def fetch_class_info(term, course_reference_number):
     # Enrollment Info
     url = 'https://ssbstureg.gmu.edu/StudentRegistrationSsb/ssb/searchResults/getClassDetails'
     headers = {
@@ -12,6 +12,7 @@ def fetch_class_info(term, crn):
         'JSESSIONID': '',  # Blank Session ID // Not Pushing Any Cookies
     }
     data = {
+        'courseReferenceNumber': crn,  # CRN Number as per PatriotWeb
         'term': term  # Session Term
     }
 
