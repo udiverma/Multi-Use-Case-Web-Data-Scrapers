@@ -47,7 +47,3 @@ To get started with any of these scrapers, follow these simple steps:
 
 ## Usage
 Each scraper comes with its own set of instructions and customizable options. Refer to the individual scraper's README file within their respective directories for detailed usage instructions.
-
-Here is a basic example to run the GMU Patriot Web Scraper:
-```sh
-python GMU_Patriot_Web_Scraper/scraper.py --term "202470" --crn "82442"
